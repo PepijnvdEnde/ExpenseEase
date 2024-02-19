@@ -1,6 +1,7 @@
 package com.example.expenseease.resources
 
 import com.example.expenseease.service.ITestService
+import com.example.expenseease.service.dto.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController
 class TestController {
     @Autowired
     private lateinit var testService: ITestService
+
+
     @RequestMapping(method = [RequestMethod.GET])
-    fun getTestString(): String {
-        return testService.getTestString()
+    fun getTestString(): User {
+        return testService.getTestUser()
     }
 
     fun setTestService(testService: ITestService) {

@@ -1,8 +1,10 @@
 package com.example.expenseease.datasource
 
-object TestDAO : ITestDAO{
+import com.example.expenseease.service.dto.User
 
-    override fun getTestString(): String {
-        return "Hello World"
+object TestDAO : ITestDAO{
+    private val user: User = User("test", "test")
+    override fun getTestUser(): User {
+        return user
     }
 }

@@ -1,6 +1,8 @@
 package com.example.expenseease.service
 
 import com.example.expenseease.datasource.ITestDAO
+import com.example.expenseease.service.dto.User
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -13,8 +15,8 @@ class TestService : ITestService {
         this.testDAO = testDAO
     }
 
-    override fun getTestString(): String {
-        return testDAO.getTestString().replace("World", "World in kotlin service")
+    override fun getTestUser(): User {
+        return testDAO.getTestUser()
     }
 
 
