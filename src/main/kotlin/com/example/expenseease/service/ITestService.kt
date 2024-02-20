@@ -4,5 +4,5 @@ import com.example.expenseease.service.dto.User
 
 
 interface ITestService {
-    fun getTestUser(): User
+    fun getTestUser(): User?
 }

@@ -23,11 +23,7 @@ class TestController {
 
 
     @RequestMapping(method = [RequestMethod.GET])
-    fun getTestString(): User {
+    fun getTestString(): User? {
         return testService.getTestUser()
-    }
-
-    fun setTestService(testService: ITestService) {
-        this.testService = testService
     }
 }

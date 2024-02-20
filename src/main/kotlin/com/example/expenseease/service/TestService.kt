@@ -11,11 +11,7 @@ class TestService : ITestService {
     @Autowired
     private lateinit var testDAO : ITestDAO
 
-    fun setTestDAO(testDAO: ITestDAO) {
-        this.testDAO = testDAO
-    }
-
-    override fun getTestUser(): User {
+    override fun getTestUser(): User? {
         return testDAO.getTestUser()
     }
 

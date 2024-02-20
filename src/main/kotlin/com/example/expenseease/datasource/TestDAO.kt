@@ -3,10 +3,13 @@ package com.example.expenseease.datasource
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseConnection
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseProperties
 import com.example.expenseease.service.dto.User
+import com.example.expenseease.service.exceptions.DatabaseException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Repository
 import java.sql.SQLException
 import java.util.logging.Level
 
+@Repository
 class TestDAO : ITestDAO {
 
     @Autowired
@@ -15,7 +18,7 @@ class TestDAO : ITestDAO {
     @Autowired
     private lateinit var databaseProperties: IDatabaseProperties
 
-    override fun getTestUser(): User {
+    override fun getTestUser(): User? {
         var user: User? = null
         val sql = "SELECT TOP(1) * FROM users"
 
@@ -34,9 +37,9 @@ class TestDAO : ITestDAO {
             statement.close()
             connection.close()
         } catch (e: SQLException) {
-            e.printStackTrace()
+            throw DatabaseException("Error while fetching test user", e)
         }
 
-        return user ?: User("test", "pass")
+        return null
     }
 }
