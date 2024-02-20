@@ -1,7 +1,8 @@
 package com.example.expenseease.service
 
-import org.apache.catalina.User
+import com.example.expenseease.service.dto.User
+
 
 interface ITestService {
-    fun getTestUser(): com.example.expenseease.service.dto.User
+    fun getTestUser(): User
 }

@@ -50,11 +50,10 @@
             <version>2.15.1</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <scope>runtime</scope>
+            <version>9.4.1.jre11</version>
         </dependency>
 
         <dependency> <!-- Toegevoegd voor het schrijven van tests -->
