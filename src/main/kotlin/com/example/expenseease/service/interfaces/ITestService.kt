@@ -1,4 +1,4 @@
-package com.example.expenseease.service
+package com.example.expenseease.service.interfaces
 
 import com.example.expenseease.service.dto.User
 

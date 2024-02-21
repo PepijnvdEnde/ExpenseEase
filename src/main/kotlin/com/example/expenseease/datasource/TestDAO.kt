@@ -1,5 +1,6 @@
 package com.example.expenseease.datasource
 
+import com.example.expenseease.datasource.interfaces.ITestDAO
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseConnection
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseProperties
 import com.example.expenseease.service.dto.User
@@ -7,7 +8,6 @@ import com.example.expenseease.service.exceptions.DatabaseException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import java.sql.SQLException
-import java.util.logging.Level
 
 @Repository
 class TestDAO : ITestDAO {
