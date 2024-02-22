@@ -1,7 +1,7 @@
 package com.example.expenseease.resources
 
 import com.example.expenseease.service.dto.User
-import com.example.expenseease.service.interfaces.ILoginService
+import com.example.expenseease.service.interfaces.IRegisterService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.*
 
 @Controller
 @RestController
-@RequestMapping("/Login")
+@RequestMapping("/Register")
 @CrossOrigin(
     origins = ["*"],
     allowedHeaders = ["*"],
     methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS]
 )
-class LoginController  {
+class RegisterController {
 
     @Autowired
-    private lateinit var loginService: ILoginService
+    lateinit var registerService: IRegisterService
 
     @RequestMapping(method = [RequestMethod.POST])
-    fun validateUser(@RequestBody user: User): ResponseEntity<*> {
-        return if (loginService.validateUser(user)) {
-            ResponseEntity.status(HttpStatus.OK).body("Valid username and password")
-        } else {
-            ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password")
+    fun registerUser(@RequestBody user: User): ResponseEntity<*> {
+        if (registerService.checkUserExists(user)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already exists")
         }
+
+        registerService.registerUser(user)
+        return ResponseEntity.status(HttpStatus.OK).body("User registered")
     }
+
 }
