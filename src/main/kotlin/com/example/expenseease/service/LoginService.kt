@@ -16,6 +16,6 @@ class LoginService: ILoginService {
     private lateinit var loginDAO: ILoginDAO
 
     override fun validateUser(user: User): Boolean {
-        return user.username == loginDAO.getTestUser(user)?.username &&  passwordEncoderService.verifyPassword(user.password, loginDAO.getTestUser(user)!!.password)
+        return user.username == loginDAO.getUser(user)?.username &&  passwordEncoderService.verifyPassword(user.password, loginDAO.getUser(user)!!.password)
     }
 }

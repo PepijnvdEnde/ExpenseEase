@@ -18,7 +18,7 @@ class RegisterService: IRegisterService {
 
     override fun checkUserExists(user: User): Boolean {
         println("User: $user Hashed Password: ${passwordEncoderService.hashPassword(user.password)}")
-        return loginDAO.getTestUser(user)?.username  != null
+        return loginDAO.getUser(user)?.username  != null
     }
 
     override fun registerUser(user: User): Boolean {

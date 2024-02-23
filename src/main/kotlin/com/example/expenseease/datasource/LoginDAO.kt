@@ -18,7 +18,7 @@ class LoginDAO : ILoginDAO {
     @Autowired
     private lateinit var databaseProperties: IDatabaseProperties
 
-    override fun getTestUser(user: User): User? {
+    override fun getUser(user: User): User? {
         try {
             val connection = databaseConnection.getConnection(databaseProperties)
             val ps = connection.prepareStatement("Select username, password from USERS where username = ?")
