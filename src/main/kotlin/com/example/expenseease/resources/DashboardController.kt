@@ -24,10 +24,9 @@ class DashboardController  {
     @RequestMapping(method = [RequestMethod.GET])
     fun validateUser(@RequestHeader("Authorization") authHeader: String): ResponseEntity<*> {
         val userDetails = authService.getUserDetailsFromToken(authHeader)
-        return if (userDetails != null && authService.validateToken(authHeader, userDetails)) {
-            ResponseEntity.status(HttpStatus.OK).body("Imagine that this is a dashboard. You are logged in!")
-        } else {
-            ResponseEntity.status(HttpStatus.OK).body("Invalid token")
+        if (userDetails == null || !authService.validateToken(authHeader, userDetails)) {
+            return ResponseEntity.status(HttpStatus.OK).body("Invalid token")
         }
+        return ResponseEntity.status(HttpStatus.OK).body("Imagine that this is a dashboard. You are logged in!")
     }
 }
