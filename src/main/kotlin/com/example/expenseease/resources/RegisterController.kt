@@ -2,6 +2,7 @@ package com.example.expenseease.resources
 
 import com.example.expenseease.service.dto.MyUser
 import com.example.expenseease.service.interfaces.IRegisterService
+import com.example.expenseease.service.AuthService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,6 +22,9 @@ class RegisterController {
     @Autowired
     lateinit var registerService: IRegisterService
 
+    @Autowired
+    lateinit var authService: AuthService
+
     @RequestMapping(method = [RequestMethod.POST])
     fun registerUser(@RequestBody user: MyUser): ResponseEntity<*> {
         if (registerService.checkUserExists(user)) {
@@ -28,7 +32,9 @@ class RegisterController {
         }
 
         registerService.registerUser(user)
-        return ResponseEntity.status(HttpStatus.OK).body("User registered")
+
+        val token = authService.generateTokenForUser(user)
+        return ResponseEntity.status(HttpStatus.OK).body(mapOf("token" to token))
     }
 
 }
