@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class AuthService(private val jwtTokenUtil: JwtTokenUtil) {
 
+
     @Autowired
     private lateinit var loginDAO: ILoginDAO
 
@@ -23,5 +24,10 @@ class AuthService(private val jwtTokenUtil: JwtTokenUtil) {
     fun getUserDetailsFromToken(token: String): MyUser? {
         val username = jwtTokenUtil.extractUsername(token)
         return loginDAO.getUser(MyUser(username, ""))
+    }
+
+    fun authUser(authHeader: String): Boolean {
+        val userDetails = getUserDetailsFromToken(authHeader)
+        return userDetails != null && validateToken(authHeader, userDetails)
     }
 }

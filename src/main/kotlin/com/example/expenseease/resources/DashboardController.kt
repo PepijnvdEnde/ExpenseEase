@@ -1,7 +1,7 @@
 package com.example.expenseease.resources
 
 import com.example.expenseease.service.AuthService
-import com.example.expenseease.service.dto.MyUser
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,10 +23,11 @@ class DashboardController  {
 
     @RequestMapping(method = [RequestMethod.GET])
     fun validateUser(@RequestHeader("Authorization") authHeader: String): ResponseEntity<*> {
-        val userDetails = authService.getUserDetailsFromToken(authHeader)
-        if (userDetails == null || !authService.validateToken(authHeader, userDetails)) {
+        if (!authService.authUser(authHeader)) {
             return ResponseEntity.status(HttpStatus.OK).body("Invalid token")
         }
         return ResponseEntity.status(HttpStatus.OK).body("Imagine that this is a dashboard. You are logged in!")
     }
+
+
 }
