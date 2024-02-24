@@ -1,10 +1,10 @@
 package com.example.expenseease.datasource.interfaces
 
-import com.example.expenseease.service.dto.User
+import com.example.expenseease.service.dto.MyUser
 
 interface ILoginDAO {
-   fun getUser(user: User): User?
+   fun getUser(user: MyUser): MyUser?
 
-   fun registerUser(user: User): Boolean
+   fun registerUser(user: MyUser): Boolean
 
 }

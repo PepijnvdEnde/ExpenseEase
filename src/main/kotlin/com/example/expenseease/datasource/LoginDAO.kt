@@ -3,9 +3,10 @@ package com.example.expenseease.datasource
 import com.example.expenseease.datasource.interfaces.ILoginDAO
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseConnection
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseProperties
-import com.example.expenseease.service.dto.User
+import com.example.expenseease.service.dto.MyUser
 import com.example.expenseease.service.exceptions.DatabaseException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Repository
 import java.sql.SQLException
 
@@ -18,7 +19,7 @@ class LoginDAO : ILoginDAO {
     @Autowired
     private lateinit var databaseProperties: IDatabaseProperties
 
-    override fun getUser(user: User): User? {
+    override fun getUser(user: MyUser): MyUser? {
         try {
             val connection = databaseConnection.getConnection(databaseProperties)
             val ps = connection.prepareStatement("Select username, password from USERS where username = ?")
@@ -27,7 +28,7 @@ class LoginDAO : ILoginDAO {
             if (resultSet.next()) {
                 val username = resultSet.getString("username")
                 val password = resultSet.getString("password")
-                return User(username, password)
+                return MyUser(username, password)
             }
 
             resultSet.close()
@@ -40,7 +41,7 @@ class LoginDAO : ILoginDAO {
         return null
     }
 
-    override fun registerUser(user: User): Boolean {
+    override fun registerUser(user: MyUser): Boolean {
         try {
             val connection = databaseConnection.getConnection(databaseProperties)
             val ps = connection.prepareStatement("Insert into USERS (username, password) values (?, ?)")

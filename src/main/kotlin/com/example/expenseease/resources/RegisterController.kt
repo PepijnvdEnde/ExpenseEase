@@ -1,6 +1,6 @@
 package com.example.expenseease.resources
 
-import com.example.expenseease.service.dto.User
+import com.example.expenseease.service.dto.MyUser
 import com.example.expenseease.service.interfaces.IRegisterService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -22,7 +22,7 @@ class RegisterController {
     lateinit var registerService: IRegisterService
 
     @RequestMapping(method = [RequestMethod.POST])
-    fun registerUser(@RequestBody user: User): ResponseEntity<*> {
+    fun registerUser(@RequestBody user: MyUser): ResponseEntity<*> {
         if (registerService.checkUserExists(user)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already exists")
         }
