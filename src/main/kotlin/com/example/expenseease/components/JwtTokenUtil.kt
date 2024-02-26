@@ -12,10 +12,6 @@ import java.util.*
 @Component
 class JwtTokenUtil {
 
-    @Value("\${jwt.secret}")
-    private lateinit var secret: String
-
-    @Value("\${jwt.expiration}")
     private var expiration: Long = 86400 // 24 hours in seconds
 
     private val key = Keys.secretKeyFor(SignatureAlgorithm.HS512)

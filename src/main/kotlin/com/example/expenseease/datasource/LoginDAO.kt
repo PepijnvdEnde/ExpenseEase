@@ -6,7 +6,6 @@ import com.example.expenseease.datasource.utils.interfaces.IDatabaseProperties
 import com.example.expenseease.service.dto.MyUser
 import com.example.expenseease.service.exceptions.DatabaseException
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Repository
 import java.sql.SQLException
 

@@ -1,7 +1,6 @@
 package com.example.expenseease.datasource.utils
 
 import com.example.expenseease.datasource.utils.interfaces.IDatabaseProperties
-import org.springframework.beans.factory.annotation.Value
 import java.io.IOException
 import java.util.*
 import java.util.logging.Level

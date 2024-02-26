@@ -1,6 +1,7 @@
 package com.example.expenseease.resources
 
 import com.example.expenseease.service.AuthService
+import io.jsonwebtoken.security.SignatureException
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -23,10 +24,17 @@ class DashboardController  {
 
     @RequestMapping(method = [RequestMethod.GET])
     fun validateUser(@RequestHeader("Authorization") authHeader: String): ResponseEntity<*> {
-        if (!authService.authUser(authHeader)) {
-            return ResponseEntity.status(HttpStatus.OK).body("Invalid token")
+        try {
+            if (authHeader.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No token")
+            }
+            if (!authService.authUser(authHeader)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token")
+            }
+            return ResponseEntity.status(HttpStatus.OK).body("Imagine that this is a dashboard. You are logged in!")
+        } catch (ex: SignatureException) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.")
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Imagine that this is a dashboard. You are logged in!")
     }
 
 
