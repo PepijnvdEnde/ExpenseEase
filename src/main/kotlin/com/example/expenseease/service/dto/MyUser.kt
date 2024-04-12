@@ -13,7 +13,7 @@ data class MyUser(
 
     override fun getPassword(): String = password
 
-    override fun getAuthorities(): Collection<GrantedAuthority> = mutableListOf<GrantedAuthority>()
+    override fun getAuthorities(): Collection<GrantedAuthority> = mutableListOf()
 
     override fun isAccountNonExpired(): Boolean = true
 
